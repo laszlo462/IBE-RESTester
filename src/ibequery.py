@@ -4,7 +4,7 @@
 # Author: Steve Szabo
 # Date: 02/26/2019
 
-import requests
+import querybuilder as query
 import json
 import logging
 import os
@@ -15,17 +15,8 @@ logging.basicConfig(level=logging.DEBUG,
                     format=' %(asctime)s - %(levelname)s - %(message)s')
 logging.debug('Start of program')
 
-urlstring = ":4342/IBEDynaLyncSvc/participants?identifier="
-
-
-def buildquery(ibehost, urlstring):
-    patmrn = input("Please enter the Participant MRN: ")
-    buildurl = "http://" + ibehost + urlstring + patmrn
-    logging.debug('Complete URL: ' + buildurl)
-    return buildurl
-
-
-def executequery(queryurl):
+### TO BE REMOVED ###
+""" def executequery(queryurl):
     logging.debug('executing the query')
     r = None
     try:
@@ -41,7 +32,7 @@ def executequery(queryurl):
 def showresponse(parsedresponse):
     str = "Search Results"
     print(str.center(20, "="))
-    print(json.dumps(parsedresponse, indent=4, sort_keys=True))
+    print(json.dumps(parsedresponse, indent=4, sort_keys=True)) """
 
 
 def get_ip():
@@ -56,7 +47,10 @@ def get_ip():
     return IP
 
 
-################################################
+####################################
+###        Main Execution        ###
+####################################
+
 print("Welcome".center(20, "="))
 print("\nDynaLync Query Test Tool".center(20))
 ibehost = input(
@@ -69,11 +63,5 @@ if ibehost == None:
 # I don't believe this even works currently
 logging.debug('Using IP: ' + ibehost)
 
-# Build the query string
-querystring = buildquery(ibehost, urlstring)
-# Execute the query and obtain response
-queryresponse = executequery(querystring)
-# Display the response
-showresponse(queryresponse)
 # Wait for exit
 input("Press any key to exit")
