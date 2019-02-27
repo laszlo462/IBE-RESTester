@@ -1,7 +1,7 @@
 # ibe-restester
 
 [![Tagged Release](https://img.shields.io/badge/release-v0-blue.svg?longCache=true)](CHANGELOG.md)
-[![Development Status](https://img.shields.io/badge/status-planning-lightgrey.svg?longCache=true)](ROADMAP.md)
+[![Development Status](https://img.shields.io/badge/status-pre--alpha-red.svg?longCache=true)](ROADMAP.md)
 [![Build Status](https://img.shields.io/badge/build-unknown-lightgrey.svg?longCache=true)](https://travis-ci.org)
 [![Build Status](https://img.shields.io/badge/build-pending-lightgrey.svg?longCache=true)](https://www.appveyor.com)
 [![Build Coverage](https://img.shields.io/badge/coverage-0%25-lightgrey.svg?longCache=true)](https://codecov.io)
@@ -28,11 +28,21 @@ _**Note:** This project was initially created by [cookiecutter-git](https://gith
 
 ## Features
 
+- Simple verification of DLL participant queries of the IBE database.
+
+> Only MRN search available in pre-alpha release. See [ROADMAP](ROADMAP.md) for more information.
+
 ## Requirements
 
-## Installation
+Currently the only requirement is Python3.
 
 ## Usage
+
+Ensure Python 3.x is installed via ```python -V```
+
+Open command prompt to ./src directory and execute the script via ```python ibequery.py```.
+
+Input the IP Address of the IBE, then the Participant MRN as prompted.  The JSON response from IBE will be displayed.
 
 ## Development
 
