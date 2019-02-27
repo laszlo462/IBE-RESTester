@@ -1,4 +1,4 @@
-# ibe-restester
+# IBE-RESTester
 
 [![Tagged Release](https://img.shields.io/badge/release-v0-blue.svg?longCache=true)](CHANGELOG.md)
 [![Development Status](https://img.shields.io/badge/status-pre--alpha-red.svg?longCache=true)](ROADMAP.md)
