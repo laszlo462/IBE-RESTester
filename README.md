@@ -10,21 +10,19 @@
 
 The IBE-RESTester project aims to facilitate easy testing of DLL to IBE participant queries, as well as aid in identifying necessary lookup table changes related to FHIR bundle creation.
 
-_**Note:** This project was initially created by [cookiecutter-git](https://github.com/NathanUrwin/cookiecutter-git)!_ :cookie:
-
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Development](#development)
-  - [Future](#future)
-  - [History](#history)
-  - [Community](#community)
-- [Credits](#credits)
-- [License](#license)
+- [IBE-RESTester](#ibe-restester)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+  - [Development](#development)
+    - [Future](#future)
+    - [History](#history)
+    - [Community](#community)
+  - [Credits](#credits)
+  - [License](#license)
 
 ## Features
 
@@ -38,11 +36,11 @@ Currently the only requirement is Python3.
 
 ## Usage
 
-Ensure Python 3.x is installed via ```python -V```
+Ensure Python 3.x is installed via `python -V`
 
-Open command prompt to ./src directory and execute the script via ```python ibequery.py```.
+Open command prompt to ./src directory and execute the script via `python ibequery.py`.
 
-Input the IP Address of the IBE, then the Participant MRN as prompted.  The JSON response from IBE will be displayed.
+Input the IP Address of the IBE, then the Participant MRN as prompted. The JSON response from IBE will be displayed.
 
 ## Development
 
