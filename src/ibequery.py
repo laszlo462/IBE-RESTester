@@ -52,8 +52,20 @@ def query_select():
     # Ask user to select query type
     qmenu = ["MRN", "EnterpriseID", "First Name", "Last Name", "Date of Birth"]
 
-    for index, value in enumerate(qmenu):
-        print(index + 1, value)
+    while True:
+        try:
+            print("Which query would you like to perform?")
+            for index, value in enumerate(qmenu):
+                print(index + 1, value)
+            qtype = int(input(": "))
+        except ValueError:
+            print("Please select from the numbers listed.")
+            continue
+        if 1 >= qtype >= 5:
+            print("Please select a valid option.")
+            continue
+        else:
+            break
 
 
 def ibe_address():
@@ -81,5 +93,6 @@ print("Welcome".center(20, "="))
 print("DynaLync Query Test Tool\n".center(20))
 ibehost = ibe_address()
 
+query_select()
 # Wait for exit
 input("Press any key to exit")
