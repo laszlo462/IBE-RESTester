@@ -48,10 +48,8 @@ def get_ip():
     return IP
 
 
-def query_select():
+def query_select(qmenu):
     # Ask user to select query type
-    qmenu = ["MRN", "EnterpriseID", "First Name", "Last Name", "Date of Birth"]
-
     while True:
         try:
             print("Which query would you like to perform?")
@@ -66,6 +64,7 @@ def query_select():
             continue
         else:
             break
+    return int(qtype - 1)
 
 
 def ibe_address():
@@ -82,17 +81,30 @@ def ibe_address():
 
 
 def new_or_quit():
-    pass
+    print("Execute another query?")
+    newquery = str.upper(
+        input("Enter Y to execute another query, or any other key to quit: "))
+    return newquery
+
 
 ####################################
 ###        Main Execution        ###
 ####################################
 
+qmenu = ["MRN", "EnterpriseID", "First Name", "Last Name", "Date of Birth"]
 
 print("Welcome".center(20, "="))
 print("DynaLync Query Test Tool\n".center(20))
 ibehost = ibe_address()
 
-query_select()
+while True:
+    qtype = query_select(qmenu)
+    qparam = str(input("Query " + qmenu[qtype] + ": "))
+
+    if new_or_quit() == "Y":
+        continue
+    else:
+        break
+
 # Wait for exit
 input("Press any key to exit")
