@@ -70,7 +70,7 @@ def query_select(qmenu):
 def ibe_address():
     # Obtain the local IP address for default, ask user to input IP address.
     local_ip = get_ip()
-    logging.debug(local_ip)
+    logging.debug("Obtained a local IP of " + local_ip)
     print("Please enter IBE IP address, or press Enter to accept default shown:")
     ibehost = input("[" + local_ip + "]: ")
 
@@ -97,9 +97,23 @@ print("Welcome".center(20, "="))
 print("DynaLync Query Test Tool\n".center(20))
 ibehost = ibe_address()
 
+# Main execution loops to allow for subsequent queries until the user is done
 while True:
     qtype = query_select(qmenu)
     qparam = str(input("Query " + qmenu[qtype] + ": "))
+    logging.debug("Querying for " + qparam)
+
+    # Execute querybuilder function based on query type selected
+    if qtype == 0:  # MRN
+        query.get_mrn(ibehost, qparam)
+    if qtype == 1:  # EID
+        query.get_eid(ibehost, qparam)
+    if qtype == 2:  # First Name
+        query.get_firstname(ibehost, qparam)
+    if qtype == 3:  # Last Name
+        query.get_lastname(ibehost, qparam)
+    if qtype == 4:  # DOB
+        query.get_dob(ibehost, qparam)
 
     if new_or_quit() == "Y":
         continue
