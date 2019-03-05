@@ -1,11 +1,7 @@
 # querybuilder.py
 # IBE Query Builder module for LCS-RESTester project
 
-# TODO: This whole thing
-
 import requests
-
-# TODO: Obtain all query paths generated from DynaLync
 
 
 def get_mrn(ibehost, mrn):
