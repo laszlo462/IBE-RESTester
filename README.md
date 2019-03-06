@@ -1,7 +1,7 @@
 # IBE-RESTester
 
-[![Tagged Release](https://img.shields.io/badge/release-v0-blue.svg?longCache=true)](CHANGELOG.md)
-[![Development Status](https://img.shields.io/badge/status-pre--alpha-red.svg?longCache=true)](ROADMAP.md)
+[![Tagged Release](https://img.shields.io/badge/release-v0.1.0-blue.svg?longCache=true)](CHANGELOG.md)
+[![Development Status](https://img.shields.io/badge/status-alpha-yellow.svg?longCache=true)](ROADMAP.md)
 [![Build Status](https://img.shields.io/badge/build-unknown-lightgrey.svg?longCache=true)](https://travis-ci.org)
 [![Build Status](https://img.shields.io/badge/build-pending-lightgrey.svg?longCache=true)](https://www.appveyor.com)
 [![Build Coverage](https://img.shields.io/badge/coverage-0%25-lightgrey.svg?longCache=true)](https://codecov.io)
@@ -26,9 +26,8 @@ The IBE-RESTester project aims to facilitate easy testing of DLL to IBE particip
 
 ## Features
 
-- Simple verification of DLL participant queries of the IBE database.
-
-> Only MRN search available in pre-alpha release. See [ROADMAP](ROADMAP.md) for more information.
+- Simple verification of the DynaLync participant queries of the IBE database.
+- Query against a patient MRN, EnterpriseID, Name, or Date of Birth.
 
 ## Requirements
 
