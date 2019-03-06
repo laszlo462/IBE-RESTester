@@ -4,7 +4,7 @@
 # Author: Steve Szabo
 # Date: 02/26/2019
 
-import requests
+import querybuilder as query
 import json
 import logging
 import os
@@ -15,36 +15,9 @@ logging.basicConfig(level=logging.DEBUG,
                     format=' %(asctime)s - %(levelname)s - %(message)s')
 logging.debug('Start of program')
 
-urlstring = ":4342/IBEDynaLyncSvc/participants?identifier="
-
-
-def buildquery(ibehost, urlstring):
-    patmrn = input("Please enter the Participant MRN: ")
-    buildurl = "http://" + ibehost + urlstring + patmrn
-    logging.debug('Complete URL: ' + buildurl)
-    return buildurl
-
-
-def executequery(queryurl):
-    logging.debug('executing the query')
-    r = None
-    try:
-        r = requests.get(queryurl)
-    except:
-        print('IBE Connection Failed...')
-
-    logging.debug('IBE Response: ' + r.text)
-    parsed = json.loads(r.text)
-    return parsed
-
-
-def showresponse(parsedresponse):
-    str = "Search Results"
-    print(str.center(20, "="))
-    print(json.dumps(parsedresponse, indent=4, sort_keys=True))
-
 
 def get_ip():
+    # Obtain local IP address via socket module
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
         s.connect(('10.255.255.255', 1))
@@ -56,24 +29,84 @@ def get_ip():
     return IP
 
 
-################################################
-print("Welcome".center(20, "="))
-print("\nDynaLync Query Test Tool".center(20))
-ibehost = input(
-    "\nPlease enter the IBE IP Address: ")
-# TODO: Regex IP validation
-# ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$
-# TODO: If Rhapsody service is present, execute get_ip().  If IBE_HOST ENV variable is present, use that.
-if ibehost == None:
-    ibehost = get_ip()
-# I don't believe this even works currently
-logging.debug('Using IP: ' + ibehost)
+def query_select(qmenu):
+    # Ask user to select query type
+    while True:
+        try:
+            print("Which query would you like to perform?")
+            for index, value in enumerate(qmenu):
+                print(index + 1, value)
+            qtype = int(input(": "))
+        except ValueError:
+            print("Please select from the numbers listed.")
+            continue
+        if 1 >= qtype >= 5:
+            print("Please select a valid option.")
+            continue
+        else:
+            break
+    return int(qtype - 1)
 
-# Build the query string
-querystring = buildquery(ibehost, urlstring)
-# Execute the query and obtain response
-queryresponse = executequery(querystring)
-# Display the response
-showresponse(queryresponse)
+
+def ibe_address():
+    # Obtain the local IP address for default, ask user to input IP address.
+    local_ip = get_ip()
+    logging.debug("Obtained a local IP of " + local_ip)
+    print("Please enter IBE IP address, or press Enter to accept default shown:")
+    ibehost = input("[" + local_ip + "]: ")
+
+    # TODO: Regex IP validation
+    # ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$
+    # TODO: If Rhapsody service is present, execute get_ip().  If IBE_HOST ENV variable is present, use that.
+    return ibehost
+
+
+def new_or_quit():
+    print("Execute another query?")
+    newquery = str.upper(
+        input("Enter Y to execute another query, or any other key to quit: "))
+    return newquery
+
+
+####################################
+###        Main Execution        ###
+####################################
+
+qmenu = ["MRN", "EnterpriseID", "First Name", "Last Name", "Date of Birth"]
+
+print("Welcome".center(20, "="))
+print("DynaLync Query Test Tool\n".center(20))
+ibehost = ibe_address()
+
+# Main execution loops to allow for subsequent queries until the user is done
+while True:
+    qtype = query_select(qmenu)
+    qparam = str(input("Query " + qmenu[qtype] + ": "))
+    logging.debug("Querying for " + qparam)
+
+    # Execute querybuilder function based on query type selected
+    # Returned request text property loaded as a json string, then dumped
+    # in a nice way (indentation and sorted by keys)
+    if qtype == 0:  # MRN
+        print(json.dumps(json.loads(query.get_mrn(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
+    if qtype == 1:  # EID
+        print(json.dumps(json.loads(query.get_eid(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
+    if qtype == 2:  # First Name
+        print(json.dumps(json.loads(query.get_firstname(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
+    if qtype == 3:  # Last Name
+        print(json.dumps(json.loads(query.get_lastname(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
+    if qtype == 4:  # DOB
+        print(json.dumps(json.loads(query.get_dob(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
+
+    if new_or_quit() == "Y":
+        continue
+    else:
+        break
+
 # Wait for exit
 input("Press any key to exit")
