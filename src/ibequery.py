@@ -15,25 +15,6 @@ logging.basicConfig(level=logging.DEBUG,
                     format=' %(asctime)s - %(levelname)s - %(message)s')
 logging.debug('Start of program')
 
-### TO BE REMOVED ###
-""" def executequery(queryurl):
-    logging.debug('executing the query')
-    r = None
-    try:
-        r = requests.get(queryurl)
-    except:
-        print('IBE Connection Failed...')
-
-    logging.debug('IBE Response: ' + r.text)
-    parsed = json.loads(r.text)
-    return parsed
-
-
-def showresponse(parsedresponse):
-    str = "Search Results"
-    print(str.center(20, "="))
-    print(json.dumps(parsedresponse, indent=4, sort_keys=True)) """
-
 
 def get_ip():
     # Obtain local IP address via socket module
@@ -104,16 +85,23 @@ while True:
     logging.debug("Querying for " + qparam)
 
     # Execute querybuilder function based on query type selected
+    # Returned request text property loaded as a json string, then dumped
+    # in a nice way (indentation and sorted by keys)
     if qtype == 0:  # MRN
-        query.get_mrn(ibehost, qparam)
+        print(json.dumps(json.loads(query.get_mrn(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
     if qtype == 1:  # EID
-        query.get_eid(ibehost, qparam)
+        print(json.dumps(json.loads(query.get_eid(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
     if qtype == 2:  # First Name
-        query.get_firstname(ibehost, qparam)
+        print(json.dumps(json.loads(query.get_firstname(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
     if qtype == 3:  # Last Name
-        query.get_lastname(ibehost, qparam)
+        print(json.dumps(json.loads(query.get_lastname(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
     if qtype == 4:  # DOB
-        query.get_dob(ibehost, qparam)
+        print(json.dumps(json.loads(query.get_dob(ibehost, qparam).text),
+                         indent=4, sort_keys=True))
 
     if new_or_quit() == "Y":
         continue
