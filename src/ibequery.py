@@ -60,12 +60,13 @@ def ibe_address():
                 local_ip = get_ip()
 
             logging.debug("Obtained IP address: " + local_ip)
-            print("Please enter IBE IP address, or press Enter to accept the detected address:")
+            print(
+                "Please enter IBE IP address, or press Enter to accept the detected address:")
             ibehost = input("[" + local_ip + "]: ")
-            if ibehost is None:
+            if not ibehost:
                 ibehost = local_ip
             # Verify legitimate IP address
-            ibehost = ipaddress.ip_address(ibehost)
+            ibehostvalidate = ipaddress.ip_address(ibehost)
         except ValueError:
             print("Invalid IP address! Please double-check the IP.")
             continue
