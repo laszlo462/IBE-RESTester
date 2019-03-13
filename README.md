@@ -1,7 +1,7 @@
 # IBE-RESTester
 
-[![Tagged Release](https://img.shields.io/badge/release-v0.1.0-blue.svg?longCache=true)](CHANGELOG.md)
-[![Development Status](https://img.shields.io/badge/status-alpha-yellow.svg?longCache=true)](ROADMAP.md)
+[![Tagged Release](https://img.shields.io/badge/release-v0.2.0-blue.svg?longCache=true)](CHANGELOG.md)
+[![Development Status](https://img.shields.io/badge/status-beta-brightgreen.svg?longCache=true)](ROADMAP.md)
 [![Build Status](https://img.shields.io/badge/build-unknown-lightgrey.svg?longCache=true)](https://travis-ci.org)
 [![Build Status](https://img.shields.io/badge/build-pending-lightgrey.svg?longCache=true)](https://www.appveyor.com)
 [![Build Coverage](https://img.shields.io/badge/coverage-0%25-lightgrey.svg?longCache=true)](https://codecov.io)
@@ -31,15 +31,17 @@ The IBE-RESTester project aims to facilitate easy testing of DLL to IBE particip
 
 ## Requirements
 
-Currently the only requirement is Python3.
+Python 3 should only be required for development.
+
+See RELEASES to download the .zip distribution containing the **ibequery.exe** console application.
 
 ## Usage
 
-Ensure Python 3.x is installed via `python -V`
+- Download the Windows distribution .zip package from RELEASES
+- Extract zip contents and navigate to the extracted folder
+- Double click on **ibequery.exe** to launch the application
 
-Open command prompt to ./src directory and execute the script via `python ibequery.py`.
-
-Input the IP Address of the IBE, then the Participant MRN as prompted. The JSON response from IBE will be displayed.
+Input the IP Address of the IBE if rquired, then the Participant MRN as prompted. The JSON response from IBE will be displayed.
 
 ## Development
 
