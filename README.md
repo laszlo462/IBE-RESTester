@@ -1,6 +1,6 @@
 # IBE-RESTester
 
-[![Tagged Release](https://img.shields.io/badge/release-v0.2.0-blue.svg?longCache=true)](CHANGELOG.md)
+[![Tagged Release](https://img.shields.io/badge/release-v0.2.0-blue.svg?longCache=true)](https://github.com/laszlo462/IBE-RESTester/releases)
 [![Development Status](https://img.shields.io/badge/status-beta-brightgreen.svg?longCache=true)](ROADMAP.md)
 [![Build Status](https://img.shields.io/badge/build-unknown-lightgrey.svg?longCache=true)](https://travis-ci.org)
 [![Build Status](https://img.shields.io/badge/build-pending-lightgrey.svg?longCache=true)](https://www.appveyor.com)
