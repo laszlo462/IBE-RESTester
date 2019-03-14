@@ -8,7 +8,7 @@ import querybuilder as query
 import json
 import logging
 import os
-import re
+import ipaddress
 import socket
 
 logging.basicConfig(level=logging.DEBUG,
@@ -50,14 +50,28 @@ def query_select(qmenu):
 
 def ibe_address():
     # Obtain the local IP address for default, ask user to input IP address.
-    local_ip = get_ip()
-    logging.debug("Obtained a local IP of " + local_ip)
-    print("Please enter IBE IP address, or press Enter to accept default shown:")
-    ibehost = input("[" + local_ip + "]: ")
+    # Now also checking for IBE_HOST environment variable on a DynaLync system
+    while True:
+        try:
+            if os.environ.get("IBE_HOST") is not None:
+                print("DynaLync IBE_HOST env variable detected")
+                local_ip = os.environ["IBE_HOST"]
+            else:
+                local_ip = get_ip()
 
-    # TODO: Regex IP validation
-    # ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$
-    # TODO: If Rhapsody service is present, execute get_ip().  If IBE_HOST ENV variable is present, use that.
+            logging.debug("Obtained IP address: " + local_ip)
+            print(
+                "Please enter IBE IP address, or press Enter to accept the detected address:")
+            ibehost = input("[" + local_ip + "]: ")
+            if not ibehost:
+                ibehost = local_ip
+            # Verify legitimate IP address
+            ibehostvalidate = ipaddress.ip_address(ibehost)
+        except ValueError:
+            print("Invalid IP address! Please double-check the IP.")
+            continue
+        break
+
     return ibehost
 
 
