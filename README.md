@@ -10,6 +10,8 @@
 
 The IBE-RESTester project aims to facilitate easy testing of DLL to IBE participant queries, as well as aid in identifying necessary lookup table changes related to FHIR bundle creation.
 
+![screenshot](docs/screenshot1.png)
+
 ## Table of Contents
 
 - [IBE-RESTester](#ibe-restester)
@@ -48,6 +50,8 @@ See [RELEASES](https://github.com/laszlo462/IBE-RESTester/releases) to download 
 - Select the query type
 - Input your query parameters and hit enter
 - The JSON response from IBE will be displayed
+
+Debug logging is still turned on by default for testing purposes, this will be disabled in a future release.
 
 ## Development
 
